@@ -50,7 +50,8 @@ function organizeWeatherData(response) {
   var dates = [];
   var date, day, hour;
   var tempWeather = {};
-  var barData = {};
+  var barDataFah = {};
+  var barDataCelcius = {};
 
   for (var i = 0; i < response.length; i++) {
     date = convertUTCDateToLocalDate(response[i].dt);
@@ -63,40 +64,31 @@ function organizeWeatherData(response) {
 
     tempWeather = {};
     tempWeather.temp = response[i].main.temp;
-    tempWeather.temp_celcius = toCelsius(response[i].main.temp);
     tempWeather.min_temp = response[i].main.temp_min;
-    tempWeather.min_temp_celcius = toCelsius(response[i].main.temp_min);
     tempWeather.max_temp = response[i].main.temp_max;
-    tempWeather.max_temp_celcius = toCelsius(response[i].main.temp_max);
 
     if (weather.hasOwnProperty(day)) {
-      barData[day].push([
-        hour,
-        parseFloat(tempWeather.temp),
-        parseFloat(tempWeather.temp_celcius)
-      ]);
+      barDataFah[day].push([parseFloat(hour), tempWeather.temp]);
+      barDataCelcius[day].push([parseFloat(hour), toCelsius(tempWeather.temp)]);
       weather[day].avg.temp += tempWeather.temp;
-      weather[day].avg.temp_celcius += tempWeather.temp_celcius;
-      weather[day].avg.min_temp += tempWeather.min_temp;
-      weather[day].avg.min_temp_celcius += tempWeather.min_temp_celcius;
-      weather[day].avg.max_temp += tempWeather.max_temp;
-      weather[day].avg.max_temp_celcius += tempWeather.max_temp_celcius;
+
+      if (weather[day].avg.min_temp > tempWeather.min_temp) {
+        weather[day].avg.min_temp = tempWeather.min_temp;
+      }
+      if (weather[day].avg.max_temp < tempWeather.max_temp) {
+        weather[day].avg.max_temp = tempWeather.max_temp;
+      }
     } else {
       weather[day] = {};
       weather[day].avg = {};
-      barData[day] = [["Hour", "Temparature °F", "Temparature °C"]];
+      barDataFah[day] = [["Hour", "Temparature °F"]];
+      barDataCelcius[day] = [["Hour", "Temparature °C"]];
       dates.push(day);
-      barData[day].push([
-        parseFloat(hour),
-        parseFloat(tempWeather.temp),
-        parseFloat(tempWeather.temp_celcius)
-      ]);
+      barDataFah[day].push([parseFloat(hour), tempWeather.temp]);
+      barDataCelcius[day].push([parseFloat(hour), toCelsius(tempWeather.temp)]);
       weather[day].avg.temp = tempWeather.temp;
-      weather[day].avg.temp_celcius = tempWeather.temp_celcius;
       weather[day].avg.min_temp = tempWeather.min_temp;
-      weather[day].avg.min_temp_celcius = tempWeather.min_temp_celcius;
       weather[day].avg.max_temp = tempWeather.max_temp;
-      weather[day].avg.max_temp_celcius = tempWeather.max_temp_celcius;
     }
     weather[day][hour] = {};
     weather[day][hour] = tempWeather;
@@ -104,11 +96,15 @@ function organizeWeatherData(response) {
 
   consolidateAverage(weather);
   console.log(weather);
+  var barData = {
+    Celcius: barDataCelcius,
+    Fahrenheit: barDataFah
+  };
   return [dates, weather, barData];
 }
 
 function toCelsius(temp) {
-  return Math.round(((temp - 32) * 5) / 9);
+  return parseFloat(((temp - 32) * 5) / 9);
 }
 
 function convertUTCDateToLocalDate(date) {
@@ -127,22 +123,23 @@ function consolidateAverage(weather) {
   for (var day in weather) {
     //-1 for the avg key
     hoursinday = Object.keys(weather[day]).length - 1;
-    weather[day].avg.temp = Math.round(weather[day].avg.temp / hoursinday);
-    weather[day].avg.min_temp = Math.round(
-      weather[day].avg.min_temp / hoursinday
+    weather[day].avg.temp = parseFloat(
+      weather[day].avg.temp / hoursinday
+    ).toFixed(2);
+    weather[day].avg.min_temp = parseFloat(weather[day].avg.min_temp).toFixed(
+      2
     );
-    weather[day].avg.max_temp = Math.round(
-      weather[day].avg.max_temp / hoursinday
+    weather[day].avg.max_temp = parseFloat(weather[day].avg.max_temp).toFixed(
+      2
     );
-    weather[day].avg.temp_celcius = Math.round(
-      weather[day].avg.temp_celcius / hoursinday
-    );
-    weather[day].avg.min_temp_celcius = Math.round(
-      weather[day].avg.min_temp_celcius / hoursinday
-    );
-
-    weather[day].avg.max_temp_celcius = Math.round(
-      weather[day].avg.max_temp_celcius / hoursinday
-    );
+    weather[day].avg.temp_celcius = parseFloat(
+      toCelsius(weather[day].avg.temp)
+    ).toFixed(2);
+    weather[day].avg.min_temp_celcius = parseFloat(
+      toCelsius(weather[day].avg.min_temp)
+    ).toFixed(2);
+    weather[day].avg.max_temp_celcius = parseFloat(
+      toCelsius(weather[day].avg.max_temp)
+    ).toFixed(2);
   }
 }

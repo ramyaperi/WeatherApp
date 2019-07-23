@@ -14,15 +14,21 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Divider from "@material-ui/core/Divider";
 
 class Weather extends Component {
   state = {
     units: "Fahrenheit",
-    showWeather: 0
+    showWeather: 0,
+    selectedValue: ""
   };
 
   handleUnitsChange = event => {
-    this.setState({ units: event.target.value });
+    this.setState({
+      units: event.target.value,
+      selectedValue: "",
+      weatherBarDay: ""
+    });
   };
   handleBackArrowClick = event => {
     this.setState({ showWeather: this.state.showWeather - 1 });
@@ -32,13 +38,14 @@ class Weather extends Component {
   };
   handleCardActionClick = value => {
     this.setState({
-      weatherBarDay: this.props.barData[value]
+      weatherBarDay: this.props.barData[this.state.units][value],
+      selectedValue: value
     });
   };
 
   componentDidMount() {
     this.props.fetchData(
-      "http://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=imperial&APPID=bd8bbf2043083b52d632d5fbf02fd5ba&cnt=40"
+      "https://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=imperial&APPID=bd8bbf2043083b52d632d5fbf02fd5ba&cnt=40"
     );
   }
 
@@ -47,7 +54,17 @@ class Weather extends Component {
       return <LoadingPage />;
     }
     return (
-      <Grid container className="Weather" spacing={2}>
+      <Grid container className="Weather">
+        <Grid container justify="center">
+          <Typography variant="h4">5 Day Weather Report</Typography>
+        </Grid>
+        <Grid container justify="center">
+          <Typography variant="h6" color="textSecondary">
+            München
+          </Typography>
+        </Grid>
+        <Grid />
+        <Grid />
         {/* radio buttons for temp selection */}
         <Grid container justify="center">
           <RadioGroup
@@ -88,13 +105,17 @@ class Weather extends Component {
             .slice(this.state.showWeather, this.state.showWeather + 3)
             .map(value => (
               <Grid key={value} item>
-                <Card>
+                <Card
+                  {...(this.state.selectedValue == value
+                    ? { style: { background: "#26c6da" } }
+                    : { style: { background: "#fafafa" } })}
+                >
                   <CardActionArea
                     onClick={() => this.handleCardActionClick(value)}
                   >
                     <CardContent>
                       <Typography variant="h4">{value.toString()}</Typography>
-
+                      <Divider light />
                       {this.state.units === "Fahrenheit" ? (
                         <>
                           <Typography color="textSecondary">

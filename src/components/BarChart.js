@@ -9,8 +9,8 @@ class BarChart extends Component {
     return (
       <React.Fragment>
         <Chart
-          chartType="ColumnChart"
-          width={300}
+          chartType="LineChart"
+          width={1000}
           height={300}
           loader={<div>Loading Chart</div>}
           data={this.props.data}
@@ -21,7 +21,7 @@ class BarChart extends Component {
               minValue: 0
             },
             vAxis: {
-              title: "Temprature in Fahrenheit"
+              title: "Temprature"
             }
           }}
         />
