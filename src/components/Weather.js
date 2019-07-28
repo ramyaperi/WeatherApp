@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from "@material-ui/core/Divider";
 
-class Weather extends Component {
+export class Weather extends Component {
   state = {
     units: "Fahrenheit",
     showWeather: 0,
@@ -27,7 +27,9 @@ class Weather extends Component {
     this.setState({
       units: event.target.value,
       selectedValue: "",
-      weatherBarDay: ""
+      weatherBarDay: "",
+      deviceLimit: 3,
+      deviceDays: 2
     });
   };
   handleBackArrowClick = event => {
@@ -47,6 +49,11 @@ class Weather extends Component {
     this.props.fetchData(
       "https://api.openweathermap.org/data/2.5/forecast?q=Munich,de&units=imperial&APPID=bd8bbf2043083b52d632d5fbf02fd5ba&cnt=40"
     );
+    if (window.innerWidth <= 500) {
+      this.setState({ deviceLimit: 1, deviceDays: 4 });
+    } else {
+      this.setState({ deviceLimit: 3, deviceDays: 2 });
+    }
   }
 
   render() {
@@ -61,6 +68,11 @@ class Weather extends Component {
         <Grid container justify="center">
           <Typography variant="h6" color="textSecondary">
             München
+          </Typography>
+        </Grid>
+        <Grid container justify="center">
+          <Typography variant="h6" color="textSecondary">
+            {this.props.days[0].toString()}
           </Typography>
         </Grid>
         <Grid />
@@ -93,7 +105,7 @@ class Weather extends Component {
             <ArrowBack />
           </IconButton>
           <IconButton
-            disabled={this.state.showWeather >= 2}
+            disabled={this.state.showWeather >= this.state.deviceDays}
             onClick={this.handleForwardArrowClick}
           >
             <ArrowForward />
@@ -102,11 +114,15 @@ class Weather extends Component {
         {/*Temperature cards --even thou paper is enough using card for future when actions needs to be added*/}
         <Grid container justify="center" spacing={8}>
           {this.props.days
-            .slice(this.state.showWeather, this.state.showWeather + 3)
+            .slice(
+              this.state.showWeather,
+              this.state.showWeather + this.state.deviceLimit
+            )
             .map(value => (
               <Grid key={value} item>
                 <Card
-                  {...(this.state.selectedValue == value
+                  className="card"
+                  {...(this.state.selectedValue === value
                     ? { style: { background: "#26c6da" } }
                     : { style: { background: "#fafafa" } })}
                 >
@@ -154,7 +170,9 @@ class Weather extends Component {
             ))}
         </Grid>
         <Grid container justify="center">
-          <BarChart data={this.state.weatherBarDay} />
+          <Grid item xs={12}>
+            <BarChart data={this.state.weatherBarDay} />
+          </Grid>
         </Grid>
       </Grid>
     );

@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Weather React Component Weather snapshot  test 1`] = `
+<WithStyles(ForwardRef(Grid))
+  className="Weather"
+  container={true}
+>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h4"
+    >
+      5 Day Weather Report
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+  >
+    <WithStyles(ForwardRef(Typography))
+      color="textSecondary"
+      variant="h6"
+    >
+      München
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+  >
+    <WithStyles(ForwardRef(Typography))
+      color="textSecondary"
+      variant="h6"
+    >
+      Sun Jul 28 2019
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid)) />
+  <WithStyles(ForwardRef(Grid)) />
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+  >
+    <ForwardRef(RadioGroup)
+      aria-label="Spacing"
+      name="spacing"
+      onChange={[Function]}
+      row={true}
+      value="Fahrenheit"
+    >
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={<ForwardRef(WithStyles) />}
+        key="Celcius"
+        label="Celcius"
+        value="Celcius"
+      />
+      <WithStyles(ForwardRef(FormControlLabel))
+        control={<ForwardRef(WithStyles) />}
+        key="Fahrenheit"
+        label="Fahrenheit"
+        value="Fahrenheit"
+      />
+    </ForwardRef(RadioGroup)>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="space-between"
+  >
+    <WithStyles(ForwardRef(IconButton))
+      disabled={true}
+      onClick={[Function]}
+    >
+      <ArrowBackIcon />
+    </WithStyles(ForwardRef(IconButton))>
+    <WithStyles(ForwardRef(IconButton))
+      disabled={false}
+      onClick={[Function]}
+    >
+      <ArrowForwardIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+    spacing={8}
+  >
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      key="Sun Jul 28 2019"
+    >
+      <WithStyles(ForwardRef(Card))
+        className="card"
+        style={
+          Object {
+            "background": "#fafafa",
+          }
+        }
+      >
+        <WithStyles(ForwardRef(CardActionArea))
+          onClick={[Function]}
+        >
+          <WithStyles(ForwardRef(CardContent))>
+            <WithStyles(ForwardRef(Typography))
+              variant="h4"
+            >
+              Sun Jul 28 2019
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Divider))
+              light={true}
+            />
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Average Temperature :
+               
+              63.47
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Minimum Temperature :
+               
+              58.83
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Maximum Temperature :
+               
+              71.25
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(ForwardRef(CardContent))>
+        </WithStyles(ForwardRef(CardActionArea))>
+      </WithStyles(ForwardRef(Card))>
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      key="Mon Jul 29 2019"
+    >
+      <WithStyles(ForwardRef(Card))
+        className="card"
+        style={
+          Object {
+            "background": "#fafafa",
+          }
+        }
+      >
+        <WithStyles(ForwardRef(CardActionArea))
+          onClick={[Function]}
+        >
+          <WithStyles(ForwardRef(CardContent))>
+            <WithStyles(ForwardRef(Typography))
+              variant="h4"
+            >
+              Mon Jul 29 2019
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Divider))
+              light={true}
+            />
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Average Temperature :
+               
+              63.47
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Minimum Temperature :
+               
+              58.83
+            </WithStyles(ForwardRef(Typography))>
+            <WithStyles(ForwardRef(Typography))
+              color="textSecondary"
+            >
+              Maximum Temperature :
+               
+              71.25
+            </WithStyles(ForwardRef(Typography))>
+          </WithStyles(ForwardRef(CardContent))>
+        </WithStyles(ForwardRef(CardActionArea))>
+      </WithStyles(ForwardRef(Card))>
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+    justify="center"
+  >
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      xs={12}
+    >
+      <BarChart />
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+</WithStyles(ForwardRef(Grid))>
+`;

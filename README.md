@@ -1,4 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Points to Note
+
+Implemented line chart as it seems to represent weather better.
+But in case bar chart is required please change components/BarChart.js
+
+chartType="LineChart"
+to
+chartType="ColumnChart"
+
+This is first hands on with material ui
 
 ## Available Scripts
 

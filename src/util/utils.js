@@ -22,29 +22,6 @@ export function fetchData(url) {
   };
 }
 
-/*function organizeWeatherData(response) {
-  var weatherBar = [];
-  var weatherDay = [];
-  for (var i = 0; i < response.length; i++) {
-    weatherBar[i] = {};
-    weatherBar[i].dt = new Date(response[i].dt * 1000);
-    weatherBar[i].temp = response[i].main.temp;
-    weatherBar[i].temp_celcius = toCelsius(response[i].main.temp);
-
-    if (i % 8 === 0) {
-      weatherDay[i / 8] = weatherBar[i];
-      weatherDay[i / 8].min_temp = response[i].main.temp_min;
-      weatherDay[i / 8].min_temp_celcius = toCelsius(response[i].main.temp_min);
-      weatherDay[i / 8].max_temp = response[i].main.temp_max;
-      weatherDay[i / 8].max_temp_celcius = toCelsius(response[i].main.temp_max);
-      weatherDay[i / 8].humidity = response[i].main.humidity;
-      weatherDay[i / 8].desc = response[i].weather[0].description;
-    }
-  }
-
-  return [weatherBar, weatherDay];
-}*/
-
 function organizeWeatherData(response) {
   var weather = {};
   var dates = [];
@@ -125,21 +102,21 @@ function consolidateAverage(weather) {
     hoursinday = Object.keys(weather[day]).length - 1;
     weather[day].avg.temp = parseFloat(
       weather[day].avg.temp / hoursinday
-    ).toFixed(2);
+    ).toFixed(1);
     weather[day].avg.min_temp = parseFloat(weather[day].avg.min_temp).toFixed(
-      2
+      1
     );
     weather[day].avg.max_temp = parseFloat(weather[day].avg.max_temp).toFixed(
-      2
+      1
     );
     weather[day].avg.temp_celcius = parseFloat(
       toCelsius(weather[day].avg.temp)
-    ).toFixed(2);
+    ).toFixed(1);
     weather[day].avg.min_temp_celcius = parseFloat(
       toCelsius(weather[day].avg.min_temp)
-    ).toFixed(2);
+    ).toFixed(1);
     weather[day].avg.max_temp_celcius = parseFloat(
       toCelsius(weather[day].avg.max_temp)
-    ).toFixed(2);
+    ).toFixed(1);
   }
 }

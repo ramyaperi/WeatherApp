@@ -10,7 +10,6 @@ class BarChart extends Component {
       <React.Fragment>
         <Chart
           chartType="LineChart"
-          width={1000}
           height={300}
           loader={<div>Loading Chart</div>}
           data={this.props.data}
