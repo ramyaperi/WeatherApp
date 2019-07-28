@@ -1,13 +1,15 @@
 ## Points to Note
 
-Implemented line chart as it seems to represent weather better.
+*Implemented line chart as it seems to represent weather better.
 But in case bar chart is required please change components/BarChart.js
 
-chartType="LineChart"
+ `chartType="LineChart" `
 to
-chartType="ColumnChart"
+ `chartType="ColumnChart" `
 
-This is first hands on with material ui
+*This is first hands-on with material ui
+* Do not have enough time for test cases
+* On mobile it is one card per screen instead of 3 on bigger screens
 
 ## Available Scripts
 
